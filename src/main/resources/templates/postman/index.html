@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>快递员界面</title>
+</head>
+<body>
+<!-- [[${#httpServletRequest.remoteUser}]]! -->
+<h3> 快递员你好！ <b th:text="${nickname}"></b></h3>
+<div style="width: 100%">
+    <h4>待收取快递：</h4>
+    <table style="padding: 20px;width: 100%">
+        <thead>
+        <tr>
+            <th>单号</th>
+            <th>物品名称</th>
+            <th>寄件人</th>
+            <th>寄件地址</th>
+            <th>联系电话</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody style="text-align: center">
+        <tr th:each="plan : ${rPlans}">
+            <td th:text="${plan.order.id}">
+                id
+            </td>
+            <td th:text="${plan.order.itemName}">
+                item name
+            </td>
+            <td th:text="${plan.order.source.name}">
+                receiver name
+            </td>
+            <td th:text="${plan.order.source.location.detailedAddress}">
+                detailed address
+            </td>
+            <td th:text="${plan.order.source.phone}">
+                detailed address
+            </td>
+            <td>
+                <a style="text-decoration:none;" th:href="${'/postman/finish/' + plan.id}">确认收取</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <hr>
+    <h4>待派送快递：</h4>
+    <table style="padding: 20px;width: 100%">
+        <thead>
+        <tr>
+            <th>单号</th>
+            <th>物品名称</th>
+            <th>收件人</th>
+            <th>收件地址</th>
+            <th>联系电话</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody style="text-align: center">
+        <tr th:each="plan : ${dPlans}">
+            <td th:text="${plan.order.id}">
+                id
+            </td>
+            <td th:text="${plan.order.itemName}">
+                item name
+            </td>
+            <td th:text="${plan.order.destination.name}">
+                receiver name
+            </td>
+            <td th:text="${plan.order.destination.location.detailedAddress}">
+                detailed address
+            </td>
+            <td th:text="${plan.order.destination.phone}">
+                detailed address
+            </td>
+            <td>
+                <a th:href="${'/postman/finish/' + plan.id}">确认送达</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+</div>
+
+<div>
+    <form style="margin: auto;width: 50%" th:action="@{/logout}" method="post">
+        <input style="width: 100%;height: 30px" type="submit" value="退出"/>
+    </form>
+</div>
+
+</body>
+</html>

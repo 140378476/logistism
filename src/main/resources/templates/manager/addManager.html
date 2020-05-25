@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>创建新管理员账户</title>
+</head>
+<body>
+<h2>创建新管理员账户</h2>
+<form action="#" th:action="@{/manager/addManager}" th:object="${userRegistryForm}" method="post">
+    <table>
+        <tr>
+            <td>用户名</td>
+            <td><input type="text" th:field="*{username}"></td>
+            <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">用户名错误</td>
+        </tr>
+        <tr>
+            <td>密码</td>
+            <td><input type="password" th:field="*{password}"></td>
+        </tr>
+        <tr>
+            <td>确认密码</td>
+            <td>
+                <input type="password" th:field="*{password2}">
+            </td>
+            <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">密码错误</td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">提交</button>
+            </td>
+        </tr>
+        <tr th:if="${success}">
+            <td>创建管理员成功！</td>
+        </tr>
+
+    </table>
+    <div><a href="/manager">返回</a> </div>
+
+</form>
+</body>
+</html>

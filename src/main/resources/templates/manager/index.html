@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员界面</title>
+</head>
+<body>
+<h3 th:inline="text">管理员 [[${nickname}]] 你好</h3>
+
+<ul>
+    <li><a href="/manager/postmen">快递员信息</a> </li>
+    <li><a href="/manager/shipments">物流信息</a> </li>
+    <li><a href="/manager/repo">仓储详情</a> </li>
+    <li><a href="/manager/addManager">添加管理员</a> </li>
+</ul>
+<div th:if="${customer}">
+    <a href="/home">返回用户页面</a>
+</div>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+</body>
+</html>

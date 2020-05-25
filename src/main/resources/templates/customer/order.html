@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>订单详情</title>
+</head>
+<body>
+<!-- [[${#httpServletRequest.remoteUser}]]! -->
+
+<h3>订单详情：</h3>
+<h4 th:if="${error}">订单无效或者不存在</h4>
+<table style="padding: 20px;width: 100%">
+    <tr>
+        <td>
+            订单号
+        </td>
+        <td th:text="${order.id}"> id</td>
+    </tr>
+    <tr>
+        <td>
+            订单状态
+        </td>
+        <td th:text="${order.state.display}"> state</td>
+    </tr>
+    <tr>
+        <td>
+            物品名称
+        </td>
+        <td th:text = "${order.itemName}"> item name</td>
+    </tr>
+    <tr>
+        <td>
+            发货地址
+        </td>
+        <td th:text = "${order.source.location.detailedAddress}"> address</td>
+    </tr>
+    <tr>
+        <td>
+            收货地址
+        </td>
+        <td th:text = "${order.destination.location.detailedAddress}"> address 2</td>
+    </tr>
+    <tr>
+        <td>
+            备注
+        </td>
+        <td th:text = "${order.remark}"> date</td>
+    </tr>
+    <tr>
+        <td>
+            创建时间
+        </td>
+        <td th:text = "${#dates.format(order.creationDate, 'yyyy-MM-dd HH:mm')}"> date</td>
+    </tr>
+</table>
+<hr>
+<div th:if="${currentState}">
+    <h3 >当前状态</h3>
+    <p th:text="${currentState}"></p>
+    <hr>
+</div>
+
+<h3>物流详情</h3>
+<table style="padding: 20px;width: 100%;">
+    <thead>
+    <tr>
+        <th style="width: 20%;text-align: left">时间</th>
+        <th >详情</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="log : ${orderLogs}">
+        <td th:text="${#dates.format(log.time, 'yyyy-MM-dd HH:mm')}">
+            time
+        </td>
+        <td style="text-align: center" th:text="${log.details}">
+            details
+        </td>
+
+    </tr>
+    </tbody>
+
+</table>
+
+<div>
+    <form style="margin-left: 20%;width: 20%" th:action="@{/home}" method="post">
+        <input style="width: 100%;height: 30px" type="submit" value="返回"/>
+    </form>
+</div>
+
+</body>
+</html>

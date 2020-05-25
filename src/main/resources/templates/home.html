@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>我的订单</title>
+</head>
+<body>
+<!-- [[${#httpServletRequest.remoteUser}]]! -->
+<h3> 你好！ <b th:text="${nickname}"></b></h3>
+
+<a href="/create">创建订单</a>
+<hr>
+<h4>我的订单：</h4>
+<table style="margin: auto;padding: 20px;width: 100%">
+    <thead>
+    <tr>
+        <th>单号</th>
+        <th>物品名称</th>
+        <th>收件人</th>
+        <th>收件地址</th>
+        <th>状态</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody style="text-align: center">
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}">
+            id
+        </td>
+        <td th:text="${order.itemName}">
+            item name
+        </td>
+        <td th:text="${order.destination.name}">
+            receiver name
+        </td>
+        <td th:text="${order.destination.location.detailedAddress}">
+            detailed address
+        </td>
+        <td th:text="${order.state.display}">
+            state
+        </td>
+        <td>
+            <a th:href="${'/order/' + order.id}">详情</a>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+<hr>
+<div>
+        <p th:if="${manager}"><a href="/manager">管理员</a></p>
+        <p th:if="${postman}"><a href="/postman">快递员</a></p>
+</div>
+
+<div>
+    <form style="margin: auto;width: 50%" th:action="@{/logout}" method="post">
+        <input style="width: 100%;height: 30px" type="submit" value="退出"/>
+    </form>
+</div>
+
+</body>
+</html>

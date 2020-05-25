@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加收货地址</title>
+</head>
+<body>
+<h2>添加收货地址</h2>
+
+<form style="padding: 20px;width: 80%;border-style: solid"
+      action="#" th:action="@{/address}" th:object="${endpointForm}" method="post">
+
+    <table >
+        <tr>
+            <td>名称</td>
+            <td style="width: 60%"><input  type="text" th:field="*{locationName}"></td>
+            <td th:if="${#fields.hasErrors('locationName')}" th:errors="*{locationName}">用户名错误</td>
+        </tr>
+
+        <tr>
+            <td>寄件人/收件人名字</td>
+            <td><input type="text"  th:field="*{name}"></td>
+            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">名字错误</td>
+        </tr>
+        <tr>
+            <td>电话号码</td>
+            <td><input type="text" th:field="*{phone}"></td>
+            <td th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">号码错误</td>
+        </tr>
+
+        <tr>
+            <td>省</td>
+            <td><input type="text" th:field="*{province}"></td>
+            <td th:if="${#fields.hasErrors('province')}" th:errors="*{province}"></td>
+        </tr>
+
+        <tr>
+            <td>市</td>
+            <td><input type="text" th:field="*{city}"></td>
+            <td th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></td>
+        </tr>
+
+        <tr>
+            <td>区</td>
+            <td><input type="text" th:field="*{district}"></td>
+
+        </tr>
+        <tr>
+            <td>街道</td>
+            <td><input type="text" th:field="*{street}"></td>
+        </tr>
+        <tr>
+            <td>详细地址</td>
+            <td><input type="text" th:field="*{address}"></td>
+        </tr>
+        <tr>
+            <td th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></td>
+        </tr>
+
+        <tr>
+            <td>备注</td>
+            <td><input type="text" th:field="*{description}"></td>
+            <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></td>
+        </tr>
+    </table>
+    <button style="width: 100%;height: 30px" type="submit" >提交</button>
+</form>
+<div>
+    <form style="margin-top: 50px;width: 20%" th:action="@{/create}" method="get">
+        <input style="width: 100%;height: 30px" type="submit" value="返回"/>
+    </form>
+</div>
+
+
+</body>
+<style>
+
+    input[type="text"] {
+        width: 80%;
+        height: 20px;
+        font-size: 18px;
+    }
+    button{
+        width: 50%;
+        margin: auto;
+    }
+
+    form{
+        width: 80%;
+    }
+
+
+</style>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>仓库详情</title>
+</head>
+<body>
+<h2>物品清单</h2>
+<table style="padding: 20px;width: 80%">
+    <thead>
+    <tr>
+        <th>物品名称</th>
+        <th>单号</th>
+    </tr>
+    </thead>
+
+    <tbody style="text-align: center">
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.itemName}">
+            Name
+        </td>
+        <td th:text="${order.id}">
+            ID
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+<hr>
+<div>
+    <form style="margin-left: 20%;width: 20%" th:action="@{/manager/repo}" method="get">
+        <input style="width: 100%;height: 30px" type="submit" value="返回"/>
+    </form>
+</div>
+</body>
+</html>

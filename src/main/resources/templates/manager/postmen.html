@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>快递员列表</title>
+</head>
+<body>
+<h2>快递员列表</h2>
+<table style="padding: 20px;width: 80%">
+    <thead>
+    <tr>
+        <th>用户名</th>
+        <th>真实姓名</th>
+        <th>联系电话</th>
+    </tr>
+    </thead>
+
+    <tbody style="text-align: center">
+    <tr th:each="postman : ${postmen}">
+        <td th:text="${postman.username}">
+            Name
+        </td>
+        <td th:text="${postman.realName}">
+            ID
+        </td>
+        <td th:text="${postman.phone}">
+            ID
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/manager/managePostman">管理快递员</a>
+<hr>
+<div>
+    <form style="margin-left: 20%;width: 20%" th:action="@{/manager}" method="get">
+        <input style="width: 100%;height: 30px" type="submit" value="返回"/>
+    </form>
+</div>
+</body>
+</html>
