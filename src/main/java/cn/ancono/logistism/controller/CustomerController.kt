@@ -82,7 +82,7 @@ class CustomerController {
     @GetMapping("/order/{orderId}")
     fun orderDetail(request: HttpServletRequest,
                     @PathVariable(required = true) orderId: Long): ModelAndView {
-        val mv = ModelAndView("/customer/order")
+        val mv = ModelAndView("customer/order")
         val username = request.remoteUser
         val op = orderDAO.findById(orderId)
         if (op.isEmpty) {

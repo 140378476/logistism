@@ -5,7 +5,11 @@
     <title>仓库详情</title>
 </head>
 <body>
-<h2>物品清单</h2>
+<h3>仓库：</h3>
+<b th:text="${repo.name}"></b>
+<p>编号：<b th:text="${repo.id}"></b></p>
+<hr>
+<h3>物品清单</h3>
 <table style="padding: 20px;width: 80%">
     <thead>
     <tr>

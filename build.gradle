@@ -9,7 +9,7 @@ plugins {
 
 group = 'com.ancono'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '14'
+sourceCompatibility = '11'
 mainClassName = 'cn.ancono.logistism.LogistismApplication'
 
 
@@ -47,14 +47,21 @@ test {
 }
 compileKotlin {
     kotlinOptions {
-        jvmTarget = "13"
+        jvmTarget = "11"
     }
 }
 compileTestKotlin {
     kotlinOptions {
-        jvmTarget = "13"
+        jvmTarget = "11"
     }
 }
+
+
+bootJar {
+    mainClassName = 'cn.ancono.logistism.LogistismApplication'
+}
+
+
 
 //jar {
 //

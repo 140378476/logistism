@@ -54,7 +54,7 @@ class ManagerController {
 
     @RequestMapping("/manager", "/manager/index")
     fun managerIndex(request: HttpServletRequest): ModelAndView {
-        val mv = ModelAndView("/manager/index")
+        val mv = ModelAndView("manager/index")
         mv.addObject("nickname", userService.getUserNickname(request.remoteUser))
         userService.getUserTypes(request.remoteUser).forEach { mv.addObject(it.s, 1) }
         return mv
@@ -63,13 +63,13 @@ class ManagerController {
     @RequestMapping("/manager/repo", "/repo")
     fun managerRepo(model: Model): String {
         model.addAttribute("repos", repoDAO.findAll())
-        return "/manager/repositories"
+        return "manager/repositories"
     }
 
     @RequestMapping("/manager/addManager", method = [RequestMethod.GET])
     fun addManagerPage(userRegistryForm: UserRegistryForm): String {
 //        model.addAttribute("registryForm", UserRegistryForm())
-        return "/manager/addManager"
+        return "manager/addManager"
     }
 
     @RequestMapping("/manager/addManager", method = [RequestMethod.POST])
@@ -81,20 +81,20 @@ class ManagerController {
     ): String {
 //        println(userRegistryForm)
         if (bindingResult.hasErrors()) {
-            return "/manager/addManager"
+            return "manager/addManager"
         }
         if (userRegistryForm.password != userRegistryForm.password2) {
             bindingResult.rejectValue("password", "", "两次输入的密码不一致")
-            return "/manager/addManager"
+            return "manager/addManager"
         }
         val succeeded = userService.registerManager(userRegistryForm)
         if (!succeeded) {
             bindingResult.rejectValue("username", "", "用户名重复")
-            return "/manager/addManager"
+            return "manager/addManager"
         }
 
         model.addAttribute("success", 1)
-        return "/manager/addManager"
+        return "manager/addManager"
     }
 
     @RequestMapping("/manager/repo/{repoId}")
@@ -105,7 +105,9 @@ class ManagerController {
         }
         val orders = orderDAO.findOrdersIn(repoId)
         model.addAttribute("orders", orders)
-        return "/manager/repo"
+        model.addAttribute("repo",repo.get())
+
+        return "manager/repo"
     }
 
 
@@ -113,7 +115,7 @@ class ManagerController {
     fun viewPostmen(model: Model): String {
         val postmen = postmanDAO.findAll()
         model.addAttribute("postmen", postmen)
-        return "/manager/postmen"
+        return "manager/postmen"
     }
 
 
@@ -142,7 +144,7 @@ class ManagerController {
         model.addAttribute("entries", entries)
         model.addAttribute("postmen", postmen)
         model.addAttribute("repositories", repositories)
-        return "/manager/managePostman"
+        return "manager/managePostman"
     }
 
     @RequestMapping("/manager/managePostman", method = [RequestMethod.POST])
@@ -154,7 +156,7 @@ class ManagerController {
     ): String {
 //        println(userRegistryForm)
         if (bindingResult.hasErrors()) {
-            return "/manager/managePostman"
+            return "manager/managePostman"
         }
         val p0 = postmanDAO.findById(managePostmanForm.postman!!)
         val r0 = repoDAO.findById(managePostmanForm.repository!!)
@@ -187,6 +189,6 @@ class ManagerController {
     fun viewShipments(model: Model) : String{
         val shipments = shipmentDAO.findLatest(20)
         model.addAttribute("shipments",shipments)
-        return "/manager/shipments"
+        return "manager/shipments"
     }
 }

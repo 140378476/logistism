@@ -39,7 +39,7 @@ interface OrderDAO : JpaRepository<Order, Long> {
     @Query("update logistism.`order` set state = ?2 where id = ?1", nativeQuery = true)
     fun updateState(orderId: Long, state: Int)
 
-    @Query("select o.* from logistism.`order` o,logistism.storage s where s.type = 0 and s.ref_id = ?1", nativeQuery = true)
+    @Query("select o.* from logistism.`order` o join logistism.storage s on o.id = s.`order` where s.type = 0 and s.ref_id = ?1", nativeQuery = true)
     fun findOrdersIn(repoId: Long): List<Order>
 }
 

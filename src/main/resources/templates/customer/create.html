@@ -51,9 +51,9 @@
 <h3>已有地址：</h3>
 <dl>
     <div th:each="endpoint : ${endpoints}">
-        <dt th:text="${endpoint.location.name}">
+        <dt th:text="${endpoint.location.name}">name
         </dt>
-        <dd th:text="${endpoint.details}"></dd>
+        <dd th:text="${endpoint.details}">detail</dd>
     </div>
 
 </dl>

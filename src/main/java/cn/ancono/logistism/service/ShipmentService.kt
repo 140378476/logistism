@@ -88,7 +88,7 @@ open class ShipmentService @Autowired constructor(
                 shipment.transportation = schedule.transportation
                 latest = next
                 shipment = shipmentDAO.save(shipment)
-                logger.info("Created shipment: ${shipment.id}:${shipment.description}")
+                logger.info("Shipment created: ${shipment.id}:${shipment.description}")
                 count++
             }
         }

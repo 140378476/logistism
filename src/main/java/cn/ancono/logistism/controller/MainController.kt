@@ -48,7 +48,7 @@ class MainController {
     fun loginPage(@RequestParam(value = "error", required = false) error: String?,
                   @RequestParam(value = "logout", required = false) logout: String?
     ): ModelAndView {
-        val mv = ModelAndView("/login")
+        val mv = ModelAndView("login")
         if (error != null) {
             mv.addObject("error", "用户名或者密码不正确")
         }
@@ -76,7 +76,7 @@ class MainController {
         val orders = orderService.getOrdersByName(username)
         model.addAttribute("orders", orders)
 
-        return "/home"
+        return "home"
     }
 
 

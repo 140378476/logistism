@@ -38,17 +38,19 @@ enum class UserType(val s: String) {
 @Transactional
 @Service
 open class UserService(
-        @Autowired
-        var userDAO: UserDAO,
-        @Autowired
-        var managerDAO: ManagerDAO,
-        @Autowired
-        var customerDAO: CustomerDAO,
-        @Autowired
-        var postmanDAO: PostmanDAO,
-        @Autowired
-        var encoder: PasswordEncoder
+
 ) : UserDetailsService {
+
+    @Autowired
+    lateinit var userDAO: UserDAO
+    @Autowired
+    lateinit var managerDAO: ManagerDAO
+    @Autowired
+    lateinit var customerDAO: CustomerDAO
+    @Autowired
+    lateinit var postmanDAO: PostmanDAO
+    @Autowired
+    lateinit var encoder: PasswordEncoder
 
     companion object {
         val logger = LogManager.getLogger()
