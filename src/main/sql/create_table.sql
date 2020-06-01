@@ -51,7 +51,7 @@ create table shipment
 create table user
 (
     username varchar(50) primary key not null, # unique username
-    password text(256)               not null, # SHA2(_,  256)
+    password text(256)               not null, # hashed password
     nickname char(50)                not null
 );
 
@@ -99,7 +99,8 @@ create table `order`
     source        int references endpoint (id), # the sender
     destination   int references endpoint (id), # the receiver
     creation_date timestamp default 0,
-    state         smallint,                     # 0: created but not retrieved, 1: on delivery, 2: finished
+    state         smallint,
+    # 0: created but not retrieved, 1: on shipment, 2: wait for delivery, 3: finished, 4: error
     remark        varchar(100)
 );
 drop table if exists storage;

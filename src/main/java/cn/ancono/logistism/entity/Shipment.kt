@@ -20,7 +20,6 @@ open class Shipment {
         ARRIVED("已完成")
     }
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     open var id: Long? = null
@@ -41,11 +40,9 @@ open class Shipment {
     open var destination: Repository? = null
 
     @Column(name = "departure_time")
-//    @Temporal(TemporalType.TIMESTAMP)
     open var departureTime: Instant? = null
 
     @Column(name = "arrival_time")
-//    @Temporal(TemporalType.TIMESTAMP)
     open var arrivalTime: Instant? = null
 
     @Enumerated(EnumType.ORDINAL)

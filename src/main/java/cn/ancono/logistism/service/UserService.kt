@@ -70,9 +70,6 @@ open class UserService(
             auth.add(SimpleGrantedAuthority("ROLE_" + t.s))
         }
         return User(u.username, u.password, auth)
-//        val user = User(m.username,m.password)
-//        val us = User("a","s")
-//        return UserDetails
     }
 
     open fun getUserTypes(username: String): EnumSet<UserType> {
